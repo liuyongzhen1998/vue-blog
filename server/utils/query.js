@@ -16,7 +16,6 @@ init.query('CREATE DATABASE zhen_blog',err=>{
     Object.assign(db,dbName)
     pool = mysql.createPool(db)
     if(err){
-        console.log(err)
         console.log("数据库已存在")
     }else{
         query(sqlContent).then(res=>{

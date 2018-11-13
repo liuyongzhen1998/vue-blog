@@ -8,4 +8,9 @@ router.get('/',async ctx=>{
     `
 })
 
+// router.prefix(`${base_API}`)
+
+router.get('/index',async ctx=>{
+    ctx.body = ` <h1>我是首页</h1> `
+})
 export default router

@@ -7,6 +7,8 @@ import router from './routes/index'
 import query from './utils/query'
 
 const app = new koa()
+//解决跨越问题
+app.use(cors())
 app.use(bodyParser())
 app.use(router.routes())
 // app.use(cors()).use(bodyParser()).use(router.routes())

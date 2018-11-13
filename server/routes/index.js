@@ -1,6 +1,7 @@
 import Router from 'koa-router'
 
 const router = new Router()
+import UserController from "../Controller/UserController"
 
 router.get('/',async ctx=>{
     ctx.body = `
@@ -10,7 +11,5 @@ router.get('/',async ctx=>{
 
 // router.prefix(`${base_API}`)
 
-router.get('/index',async ctx=>{
-    ctx.body = ` <h1>我是首页</h1> `
-})
+router.post('/api/login',UserController.login)
 export default router

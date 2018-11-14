@@ -32,7 +32,7 @@
     }
   }
   Validator.localize('en',dict);
-
+  import {setToken} from "../utils/auth";
   import request from '@/utils/request'
   export default {
     name: "Login",
@@ -53,16 +53,26 @@
             method:'post',
             data:this.LoginForm
           }).then(res=>{
-            console.log(res)
-            //如果用户名密码不正确给出提示
-
+            if(res.success){
+                let token = res.token;
+                setToken(token);
+                this.$store.commit('SET_TOKEN',token)
+                this.$router.push('/list')
+            }else{
+              //如果用户名密码不正确给出提示
+              this.$notify({
+                type:'warn',
+                group:'user',
+                title:'登陆失败',
+                text:res.message
+              })
+            }
             //要先得到token值 将token存到Cookie里面去
             //跳转博客首页
           }).catch(err=>{
             //错误请求，把错误扔到控制台
           })
         }else{
-          console.log(this.errors.items)
           this.$notify({
             width:1000,
             type:'warn',

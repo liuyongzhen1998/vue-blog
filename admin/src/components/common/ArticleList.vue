@@ -12,6 +12,8 @@
 <script>
     import request from '@/utils/request'
     import moment from 'moment'
+    import {mapState,mapMutations} from 'vuex'
+
     export default {
       name: "ArticleList",
       data(){
@@ -19,6 +21,11 @@
           articleList:[],
           activeIndex:-1
         }
+      },
+      //吧全局的vuex里面的state和Mutations放到计算属性中
+      computed:{
+        ...mapState(['id','title','tags','content','isPublished']),
+        ...mapMutations(['SET_CURRENT_ARTICLE'])
       },
       //前组件创建的时候自带执行里面请求
       // 钩子

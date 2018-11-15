@@ -11,7 +11,7 @@
       <main>
         <div class="article-list">
           <section class="btn-container">
-            <button id="add" class="not-del" @click="postArticle">新文章</button>
+            <button id="add" class="not-del" @click="addArticle">新文章</button>
           </section>
           <!--文章列表组件-->
           <article-list ref="articleList"></article-list>
@@ -29,7 +29,8 @@
   import Editor from  '@/components/common/Editor'
   import Aside from  '@/components/common/Aside'
   import HeadNav from '@/components/common/HeadNav'
-    export default {
+  import request from '@/utils/request'
+  export default {
       name: "List",
       data(){
         return{
@@ -43,8 +44,18 @@
         HeadNav
       },
       methods:{
-        postArticle(){
-
+        addArticle(){
+          request({
+            method:'post',
+            url:'/articles/add',
+            data:{}
+          }).then(res=>{
+            //获取到插入文章的id值
+            const addID = res.insertId
+            this.$refs.articleList.updateList(addID)
+          }).catch(err=>{
+            console.log(err)
+          })
         }
       }
     }

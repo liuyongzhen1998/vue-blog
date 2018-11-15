@@ -19,5 +19,9 @@ router.post('/api/login',UserController.login)
 router.get('/api/logout',checkTOken,UserController.logout)
 //获取所以文章
 router.get('/api/articles',checkTOken,ArticleController.getArticles)
+//添加新文章
+router.post('/api/articles/add',checkTOken,ArticleController.addArticles)
+//查询一下最新发布的那片文章的详细信息
+router.get('/api/articles/:id',checkTOken,ArticleController.getOneArticles)
 
 export default router

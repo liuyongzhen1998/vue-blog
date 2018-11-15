@@ -21,6 +21,7 @@
 
 <script>
   import {Validator} from 'vee-validate'
+  Validator.localize('en',dict);
   const dict = {
     custom:{
       user:{
@@ -31,8 +32,7 @@
       }
     }
   }
-  Validator.localize('en',dict);
-  import {setToken} from "../utils/auth";
+  import { setToken } from "../utils/auth";
   import request from '@/utils/request'
   export default {
     name: "Login",

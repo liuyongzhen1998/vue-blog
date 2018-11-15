@@ -6,7 +6,7 @@ import router from './router'
 //将状态管理的文件引入进来
 import store from '@/store'
 //将图表库的js文件引入进来
-// import '@/assets/image/icon/iconfont'
+import '@/assets/img/icon/iconfont'
 //将全局的样式引入进来
 import '@/assets/style/index.scss'
 // 项目中 vue里面的插件都在main.js入口文件中引入
@@ -16,6 +16,9 @@ Vue.use(VeeValidate)
 
 import Notifications from 'vue-notification'
 Vue.use(Notifications)
+
+//权限判断
+import '@/permission'
 
 Vue.config.productionTip = false
 

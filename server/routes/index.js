@@ -24,4 +24,7 @@ router.post('/api/articles/add',checkTOken,ArticleController.addArticles)
 //查询一下最新发布的那片文章的详细信息
 router.get('/api/articles/:id',checkTOken,ArticleController.getOneArticles)
 
+router.post('/api/articles/update/:id',checkTOken,ArticleController.UpdataArticles)
+
+
 export default router

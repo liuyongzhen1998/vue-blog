@@ -5,13 +5,24 @@ const mutations = {
   SET_USERNAME:(state,uaername)=>{
     state.uaername = uaername
   },
+  //设置title改变的方法
+  SET_TITLE:(state,title)=>{
+    state.title = title
+  },
+  //设置改变tags的方法
+  SET_TGAS:(state,tags)=>{
+    state.tags = tags
+  },
+  SET_CONTENT:(state,content)=>{
+    state.content = content
+  },
   // 设置当前正在编辑的文章，将它存放到vue中。。
   SET_CURRENT_ARTICLE:(state,{id,title,tags,content,isPublished})=>{
     state.id = id
     state.title = title
     state.tags = tags
     state.content = content
-    state.isPublished
+    state.isPublished = isPublished
   },
   // 设置文章是否删除
   SET_DELETE_ARTICLE:(state)=>{

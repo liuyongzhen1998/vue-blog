@@ -1,6 +1,7 @@
 <template>
   <div>
     <ul class="list">
+
       <li class="article" :class="{active: activeIndex === index, published: isPublished === 1}" v-for="{title, createTime, isPublished, isChosen},index in articleList" @click="select(index)">
         <header>{{ title }}</header>
         <p>{{ createTime }}</p>
@@ -10,7 +11,7 @@
 </template>
 
 <script>
-    import request from '@/utils/request'
+  import request from '@/utils/request'
     import moment from 'moment'
     import {mapState,mapMutations} from 'vuex'
 
@@ -19,16 +20,16 @@
       data(){
         return{
           articleList:[],
-          activeIndex:-1
-        }
+          activeIndex:-1,
+      }
       },
       //吧全局的vuex里面的state和Mutations放到计算属性中
       computed:{
-        ...mapState(['id','title','tags','content','isPublished'])
+      ...mapState(['id','title','content','isPublished'])
       },
       //前组件创建的时候自带执行里面请求
       // 钩子
-      created(){
+    created(){
         request({
           method:'get',
           url:'/articles'
@@ -58,7 +59,6 @@
             article.isChosen = true
             this.articleList.unshift(article)
             //如果发布了新文章，当前文章被选中的文章
-
             ++ this.activeIndex
           }).catch(err=>{
             console.log(err)
@@ -70,6 +70,29 @@
           this.SET_CURRENT_ARTICLE(this.articleList[index])
         },
         ...mapMutations(['SET_CURRENT_ARTICLE'])
+      },
+      //监听vuex数据变化,如果发生变化更新articleList
+      watch:{
+        title(val){
+          if(this.articleList.length !== 0){
+            this.articleList[this.activeIndex].title = val
+          }
+        },
+        tags(val){
+          if(this.articleList.length !== 0){
+            this.articleList[this.activeIndex].tags = val
+          }
+        },
+        content(val){
+          if(this.articleList.length !== 0){
+            this.articleList[this.activeIndex].content = val
+          }
+        },
+        isPublished(val){
+          if(this.articleList.length !== 0){
+            this.articleList[this.activeIndex].isPublished = val
+          }
+        },
       }
     }
 </script>

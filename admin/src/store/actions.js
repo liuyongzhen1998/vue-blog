@@ -1,8 +1,24 @@
 import request from '@/utils/request'
-const actions = {
-  //登陆方法
-  //登陆方法传递两个参数 usernmae，password
-  //commit只是为了触发mutations方法
 
+//actions里面的方法和mutations里面的方法主要区别在于，actions里面可以写异步代码，而mutations里面
+// 只能写同步代码，所以，通常情况下，我们会把业务代码放在actions里面
+const actions = {
+  async saveArticle({commit,state},{id,title,tags,content,isPublished}){
+    request({
+      method:'post',
+      url:`/articles/update/${id}`,
+      data:{
+        title,
+        tags,
+        content,
+        isPublished
+      }
+    }).then(res=>{
+      console.log(res)
+    }).catch(err=>{
+      console.log(err)
+    })
+    commit('SET_CURRENT_ARTICLE',{id,title,tags,content,isPublished})
+  },
 }
 export default actions

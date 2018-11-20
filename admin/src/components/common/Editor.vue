@@ -14,7 +14,7 @@
               <sup @click="deleteTag(index)">x</sup>
             </li>
           </ul>
-          <input type="text" class="tag-input" id="tag-input" @keydown.Enter="addTag">
+          <input v-if="showTags" type="text" class="tag-input" id="tag-input" @keydown.enter="addTag">
           <span class="tag-add" @click="addTag">+</span>
         </section>
         <section class="but-container">
@@ -40,6 +40,7 @@
       data(){
         return {
           Simplemde:'', //编译器
+          showTags:false //默认不显示
         }
       },
       computed:{
@@ -95,8 +96,17 @@
             this.autosave()
         },
         // 添加标签
-        addTag:()=>{
-
+        addTag(){
+          if(this.showTags){
+            const newTag = document.querySelector('#tag-input').value
+            //标签不能重复
+            if (newTag && this.tags.indexOf(newTag) === -1){
+              this.getTags.push(newTag)
+              //自动保存
+              this.autosave()
+            }
+          }
+          this.showTags = !this.showTags
         }
       }
     }

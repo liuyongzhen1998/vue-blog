@@ -14,5 +14,11 @@ class ArticleModel {
         return await query(eacape`UPDATE ARTICLE SET title=${title},tags=${tags},content=${content} WHERE id=${id}`)
         // console.log(`UPDATE ARTICLE SET title='${title}',tags='${tags}',content='${content}' WHERE id='${id}'`)
     }
+    async deleteArticles(id){
+        return await query(eacape `DELETE FROM ARTICLE WHERE id=${id}`)
+    }
+    async publishArticles(id){
+        return await query(eacape `UPDATE ARTICLE SET publishTime=NOW(),isPublished=1 WHERE id=${id}`)
+    }
 }
 export default new ArticleModel()

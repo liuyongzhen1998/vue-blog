@@ -17,5 +17,15 @@ class ArticleController {
         const res = await Article.updateArticle(id,ctx.request.body)
         ctx.body = res
     }
+    async deleteArticles(ctx){
+        const id = ctx.params.id
+        const res = await Article.deleteArticles(id)
+        ctx.body = res
+    }
+    async publishArticles(ctx){
+        const id = ctx.params.id
+        const res = await Article.publishArticles(id)
+        ctx.body = res
+    }
 }
 export default new ArticleController()

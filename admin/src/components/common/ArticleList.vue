@@ -25,7 +25,7 @@
       },
       //吧全局的vuex里面的state和Mutations放到计算属性中
       computed:{
-      ...mapState(['id','title','content','isPublished'])
+      ...mapState(['id','title','content','isPublished','toggleDelete'])
       },
       //前组件创建的时候自带执行里面请求
       // 钩子
@@ -93,6 +93,24 @@
             this.articleList[this.activeIndex].isPublished = val
           }
         },
+        toggleDelete(val){
+          //如果这个值有变化，从fales变为true，说明当前文章是需要删除的
+          this.articleList.splice(this.activeIndex,1)
+          if(this.activeIndex === this.articleList.length){
+            this.activeIndex --
+          }
+          if(this.articleList.length !==0){
+            this.SET_CURRENT_ARTICLE(this.articleList[this.activeIndex])
+          }else{
+            this.SET_CURRENT_ARTICLE({
+              id:'',
+              title:'',
+              tags:'',
+              content:'',
+              isPublished:''
+            })
+          }
+        }
       }
     }
 </script>

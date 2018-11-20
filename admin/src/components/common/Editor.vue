@@ -1,7 +1,5 @@
 <template>
     <div class="editor">
-      {{title}}
-      {{getTags}}
       <input type="text" class="title" id="title" v-model="title" @input="autosave">
       <div class="operate-bar">
         <section class="tag-container">
@@ -18,8 +16,8 @@
           <span class="tag-add" @click="addTag">+</span>
         </section>
         <section class="but-container">
-          <button id="delete" class="delete">删除文章</button>
-          <button id="submit" class="not-del">发布文章</button>
+          <button id="delete" class="delete" @click="deleteArticle">删除文章</button>
+          <button id="submit" class="not-del" @click="publishArticle">发布文章</button>
         </section>
       </div>
       <p class="tips">标签查询页面只能批量更改标签，修改的文章内容会自动保存</p>
@@ -33,6 +31,7 @@
     import 'simplemde/dist/simplemde.min.css'
     import SimpleMDE from 'simplemde'
     import { mapState,mapGetters } from 'vuex'
+    import request from '@/utils/request'
     //引入debounce方法
     import debounce from 'lodash.debounce'
     export default {
@@ -79,7 +78,7 @@
       },
       methods:{
           //自动保存
-          autosave:debounce(function(){
+        autosave:debounce(function(){
             if(this.id){
               this.$store.dispatch('saveArticle',{
                 id:this.id,
@@ -107,6 +106,33 @@
             }
           }
           this.showTags = !this.showTags
+        },
+        //删除文章
+        deleteArticle(){
+          request({
+            url:`/articles/del/${this.id}`,
+            method:'delete',
+            data:{}
+          }).then(res=>{
+            // 删除后让视图也跟着删除
+            this.$store.commit('SET_DELETE_ARTICLE')
+          }).catch(err=>{
+            console.log(err)
+          })
+        },
+        //发布文章
+        publishArticle(){
+          if(!this.isPublished){
+            request({
+              url:`/articles/publish/${this.id}`,
+              method: 'put',
+              data:{}
+            }).then(res=>{
+              this.$store.commit('SET_PUBLISH_STATE')
+            }).catch(err=>{
+              console.log(err)
+            })
+          }
         }
       }
     }

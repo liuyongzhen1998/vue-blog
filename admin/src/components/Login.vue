@@ -1,12 +1,10 @@
 <template>
     <div class="login-container">
       <header class="login-head">
-        <span>zhen博客系统</span>
-        <img class="logo" src="../assets/img/logo.png">
+        <h1>欢迎访问我的博客</h1>
       </header>
       <section class="form">
         <span class="slogan">
-          登登登。。录
           <span>/ Login</span>
         </span>
         <input name="user" v-validate="'required'" type="text" id="user" placeholder="请输入用户名" v-model="LoginForm.user">

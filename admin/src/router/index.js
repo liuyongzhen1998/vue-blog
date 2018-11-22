@@ -5,6 +5,7 @@ Vue.use(Router)
 //  引入主页面组件
 import Login from '@/components/Login'
 import List from '@/components/List'
+import Tag from  '@/components/Tag'
 export default new Router({
   routes: [
     {
@@ -18,6 +19,10 @@ export default new Router({
     {
       path:'/list',
       component:List
+    },
+    {
+      path: '/tags',
+      component: Tag
     },
     {
       path:'*',

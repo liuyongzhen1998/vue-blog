@@ -1,5 +1,4 @@
 import Article from '../models/ArticleModel'
-import query from "../utils/query";
 class ArticleController {
     async getArticles(ctx){
         ctx.body = await Article.getAllArticles()

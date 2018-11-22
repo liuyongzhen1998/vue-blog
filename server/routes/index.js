@@ -3,6 +3,7 @@ import Router from 'koa-router'
 const router = new Router()
 import UserController from "../Controller/UserController"
 import ArticleController from '../Controller/ArticleController'
+import TagsController from '../Controller/TagsController'
 import checkTOken from '../utils/checkToken'
 
 
@@ -28,6 +29,6 @@ router.post('/api/articles/update/:id',checkTOken,ArticleController.UpdataArticl
 router.delete('/api/articles/del/:id',checkTOken,ArticleController.deleteArticles)
 //发布文章
 router.put('/api/articles/publish/:id',checkTOken,ArticleController.publishArticles)
-
-
+//获取所有tags
+router.get('/api/get/tags',checkTOken,TagsController.getTags)
 export default router

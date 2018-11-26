@@ -4,6 +4,7 @@ const router = new Router()
 import UserController from "../Controller/UserController"
 import ArticleController from '../Controller/ArticleController'
 import TagsController from '../Controller/TagsController'
+import HomeController from '../Controller/homeController'
 import checkTOken from '../utils/checkToken'
 
 
@@ -31,4 +32,10 @@ router.delete('/api/articles/del/:id',checkTOken,ArticleController.deleteArticle
 router.put('/api/articles/publish/:id',checkTOken,ArticleController.publishArticles)
 //获取所有tags
 router.get('/api/get/tags',checkTOken,TagsController.getTags)
+
+
+router.get('/api/article/list',HomeController.ShowArticle)
+
+router.post('/api/comment',HomeController.comment)
+
 export default router

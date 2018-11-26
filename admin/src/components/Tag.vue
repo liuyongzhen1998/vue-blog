@@ -10,8 +10,8 @@
       <hr>
      <h1>标签</h1>
       <ul class="tags">
-        <li v-for="tag in tagss">
-          <a href="javascript:void(0)" @click="goAnchor(tag.id)">{{ tag }}</a>
+        <li v-for="(tag,index) in tagss">
+          <a href="javascript:void(0)" :class="{active:temporary.indexOf(tag)!= -1}" @click="goAnchor(tag,index)" :key="index">{{ tag }}</a>
         </li>
       </ul>
     </div>
@@ -32,14 +32,16 @@
   import Aside from  '@/components/common/Aside'
   import HeadNav from '@/components/common/HeadNav'
   import request from '@/utils/request'
-
+  import Vue from 'vue'
   import moment from 'moment'
   moment.locale('zh-CN')
   export default {
     data() {
       return {
-        introductions: {},
-        tagss: []
+        // introductions: {},
+        tagss: [],
+        temporary:[],
+        checked:false
       }
     },
     // 计算属性
@@ -72,8 +74,15 @@
       })
     },
     methods: {
-      goAnchor(id) {
-        console.log(id)
+      goAnchor(name,index,$event) {
+        if(this.temporary.indexOf(name) === -1 ){
+          this.temporary.push(name)
+        }else{
+          let index = this.temporary.indexOf(name);
+          this.temporary.splice(index, 1);
+        }
+        console.log(this.temporary)
+
       }
     }
   }
@@ -99,13 +108,22 @@
       }
     }
 
-    a {
+    a{
       margin: 0 1em 1em 0;
       padding: 0.3em;
       color: #f18f01;
       border-radius: 2px;
       border: 1px solid #f18f01;
       cursor: pointer;
+    }
+    .active{
+      margin: 0 1em 1em 0;
+      padding: 0.3em;
+      color: #ffffff;
+      border-radius: 2px;
+      border: 1px solid #f18f01;
+      cursor: pointer;
+      background:#f18f01 ;
     }
   }
 </style>

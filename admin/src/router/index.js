@@ -6,6 +6,7 @@ Vue.use(Router)
 import Login from '@/components/Login'
 import List from '@/components/List'
 import Tag from  '@/components/Tag'
+import ReadingList from '@/components/ReadingList'
 export default new Router({
   routes: [
     {
@@ -23,6 +24,10 @@ export default new Router({
     {
       path: '/tags',
       component: Tag
+    },
+    {
+      path:'/ReadingList',
+      component:ReadingList
     },
     {
       path:'*',
